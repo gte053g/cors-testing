@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>API ONE</title>
+<script>
+function callCors(){
+	document.getElementById("corsmsg").value = 'Calling CORS';
+	
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+       document.getElementById("corsmsg").value = xhttp.responseText;
+
+	    if (this.readyState == 4 && this.status == 200) {
+	       // Typical action to be performed when the document is ready:
+	    }
+	};
+	xhttp.open("POST", "http://apitwo.corstesting.com:8082/apitwo/corstest/", true);
+	xhttp.setRequestHeader("Content-Type", "application/json");
+	xhttp.setRequestHeader("X-NoAuthorization", "true");
+	xhttp.withCredentials = true;
+	
+	xhttp.send();
+
+}
+</script>
+</head>
+<body>
+
+<table>
+		<tr>
+			<td><textarea id="corsmsg"rows="25" cols="75"></textarea></td>
+		</tr>
+		<tr>
+			<td><button class="btn success" onclick="callCors();">CORS</button></td>
+		</tr>
+
+	</table>
+
+
+</body>
+</html>
